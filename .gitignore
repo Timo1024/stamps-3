@@ -1,0 +1,51 @@
+# Node.js / React
+node_modules/
+dist/
+.vite/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# MySQL / Database
+*.sql-journal
+db_data/
+docker-entrypoint-initdb.d/
+
+# Logs
+*.log
+logs/
+
+# Docker
+.dockerignore
+*.env
+docker-compose.override.yml
+
+# Editor Configs
+.vscode/
+.idea/
+*.swp
+*~
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Test Coverage
+coverage/
+.nyc_output/
+
+# Build Files
+build/
+temp/
+.cache/
+
+# Miscellaneous
+debug.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
