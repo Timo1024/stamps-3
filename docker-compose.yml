@@ -8,10 +8,13 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ./database/init-scripts:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
     ports:
       - "3307:3306"
+    healthcheck:  # Add this
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
   
   backend:
     build: ./backend
@@ -21,7 +24,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     volumes:
       - ./backend:/app
     restart: always
