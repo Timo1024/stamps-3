@@ -1,0 +1,1 @@
+from .database import SessionLocal, Base  # Ensure these are imported from database.py

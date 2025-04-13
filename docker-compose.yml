@@ -21,6 +21,8 @@ services:
     container_name: fastapi_backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      # Set this to true when you want to populate the database
+      - POPULATE_DB=false
     ports:
       - "8000:8000"
     depends_on:
@@ -28,6 +30,8 @@ services:
         condition: service_healthy
     volumes:
       - ./backend:/app
+    # Use this if you need to run a command that uses the populate_tables.py script
+    # command: python -m app.populate_tables
     restart: always
 
 volumes:

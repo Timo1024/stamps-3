@@ -12,7 +12,7 @@ class Set(Base):
     year = Column(Integer)
     url = Column(String(2083))
     name = Column(String(2083))
-    set_description = Column(Text)
+    description = Column(Text)
     
     stamps = relationship("Stamp", back_populates="set")
 
