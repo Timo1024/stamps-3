@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 class Set(Base):
-    __tablename__ = "sets"
+    __tablename__ = "sets"  # Confirm this matches your actual table name
     
     setid = Column(Integer, primary_key=True)
     country = Column(String(255))
@@ -15,6 +15,9 @@ class Set(Base):
     description = Column(Text)
     
     stamps = relationship("Stamp", back_populates="set")
+    
+    def __repr__(self):
+        return f"<Set(id={self.setid}, country='{self.country}', name='{self.name}')>"
 
 class Stamp(Base):
     __tablename__ = "stamps"

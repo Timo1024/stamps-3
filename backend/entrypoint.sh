@@ -31,6 +31,14 @@ fi
 if [ "$POPULATE_DB" = "true" ]; then
     echo "Populating database..."
     python -m app.populate_tables
+    
+    # Force a final verification that data exists and is accessible
+    echo "Verifying data was populated correctly..."
+    python -c "from app.database import engine, SessionLocal; from app.models import Set, Stamp, Theme, Image, Color; db = SessionLocal(); print(f'Sets count: {db.query(Set).count()}'); print(f'Stamps count: {db.query(Stamp).count()}'); print(f'Themes count: {db.query(Theme).count()}'); print(f'Images count: {db.query(Image).count()}'); print(f'Colors count: {db.query(Color).count()}'); db.close()"
+    
+    # Ensure database connection is truly closed
+    echo "Closing all database connections..."
+    python -c "from app.database import engine; engine.dispose()"
 fi
 
 # Start the FastAPI application
