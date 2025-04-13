@@ -47,6 +47,20 @@ def populate_stamps():
         with open("app/csv_data/stamps.csv", "r") as file:
             reader = csv.DictReader(file)
             for row in reader:
+                # Helper function to safely convert to float
+                def safe_float(value, default=None):
+                    try:
+                        return float(value) if value.strip() else default
+                    except (ValueError, AttributeError):
+                        return default
+                
+                # Helper function to safely convert to int
+                def safe_int(value, default=None):
+                    try:
+                        return int(value) if value.strip() else default
+                    except (ValueError, AttributeError):
+                        return default
+                
                 new_stamp = Stamp(
                     number=row["number"],
                     type=row["type"],
@@ -58,30 +72,30 @@ def populate_stamps():
                     unused=row["unused"],
                     used=row["used"],
                     letter_fdc=row["letter_fdc"],
-                    date_of_issue=row["date_of_issue"],
+                    date_of_issue=row["date_of_issue"] if row["date_of_issue"] else None,
                     perforations=row["perforations"],
                     sheet_size=row["sheet_size"],
                     designed=row["designed"],
                     engraved=row["engraved"],
                     height_width=row["height_width"],
-                    image_accuracy=int(row["image_accuracy"]),
-                    perforation_horizontal=float(row["perforation_horizontal"]),
-                    perforation_vertical=float(row["perforation_vertical"]),
+                    image_accuracy=safe_int(row["image_accuracy"]),
+                    perforation_horizontal=safe_float(row["perforation_horizontal"]),
+                    perforation_vertical=safe_float(row["perforation_vertical"]),
                     perforation_keyword=row["perforation_keyword"],
-                    value_from=float(row["value_from"]),
-                    value_to=float(row["value_to"]),
-                    number_issued=int(row["number_issued"]),
-                    mint_condition_float=float(row["mint_condition_float"]),
-                    unused_float=float(row["unused_float"]),
-                    used_float=float(row["used_float"]),
-                    letter_fdc_float=float(row["letter_fdc_float"]),
-                    sheet_size_amount=float(row["sheet_size_amount"]),
-                    sheet_size_x=float(row["sheet_size_x"]),
-                    sheet_size_y=float(row["sheet_size_y"]),
+                    value_from=safe_float(row["value_from"]),
+                    value_to=safe_float(row["value_to"]),
+                    number_issued=safe_int(row["number_issued"]),
+                    mint_condition_float=safe_float(row["mint_condition_float"]),
+                    unused_float=safe_float(row["unused_float"]),
+                    used_float=safe_float(row["used_float"]),
+                    letter_fdc_float=safe_float(row["letter_fdc_float"]),
+                    sheet_size_amount=safe_float(row["sheet_size_amount"]),
+                    sheet_size_x=safe_float(row["sheet_size_x"]),
+                    sheet_size_y=safe_float(row["sheet_size_y"]),
                     sheet_size_note=row["sheet_size_note"],
-                    height=float(row["height"]),
-                    width=float(row["width"]),
-                    setid=int(row["setid"]),  # Foreign key reference to Set
+                    height=safe_float(row["height"]),
+                    width=safe_float(row["width"]),
+                    setid=safe_int(row["setid"]),  # Foreign key reference to Set
                 )
                 db.add(new_stamp)
 

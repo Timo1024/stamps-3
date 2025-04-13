@@ -1,19 +1,82 @@
-# start
+# Stamps 3 Application
 
-docker-compose build
+## Starting the Application
 
+```bash
+# Build backend with no cache to ensure fresh dependencies
+docker-compose build --no-cache backend
+
+# Start all services in detached mode
 docker-compose up -d
+```
 
-# stop
+## Stopping the Application
 
-docker-compose down
+```bash
+# Stop and remove containers, networks, and volumes
+docker-compose down -v
+```
 
-# check if is running
+## Monitoring
 
+```bash
+# Check running containers
 docker ps -a
+
+# Check service status
 docker-compose ps
+
+# View database logs
 docker logs mysql_container
 
-# check backend
+# View backend logs
+docker logs fastapi_backend
+```
 
-http://localhost:8000/docs
+## Access
+
+- Backend API: http://localhost:8000/docs
+
+## Troubleshooting Database Issues
+
+If you encounter database errors during initialization:
+
+### Complete Reset
+
+```bash
+# Stop and completely remove everything including volumes
+docker-compose down -v
+
+# Remove any residual Docker volumes
+docker volume rm stamps_3_db_data
+
+# Rebuild and restart
+docker-compose build --no-cache backend
+docker-compose up -d
+```
+
+### Common Errors
+
+1. **Unknown column errors**: Caused by mismatches between the model and database schema
+   - Solution: Complete reset as described above
+
+2. **Duplicate entry errors**: Duplicate values in unique columns
+   - Solution: Modify docker-compose.yml to set `RESET_DB=true` if not already set
+
+3. **Type conversion errors**: Data type mismatches 
+   - Solution: Check data formats in CSV files or fix models
+
+### Manually Checking Database
+
+```bash
+# Connect to MySQL container
+docker exec -it mysql_container mysql -u rbonkass -p
+
+# Enter password when prompted (from .env file)
+
+# Inside MySQL
+USE stamps_db;
+SHOW TABLES;
+DESCRIBE sets;  # View table structure
+SELECT * FROM sets LIMIT 5;  # Check data
+```

@@ -5,6 +5,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install additional packages if specified
+ARG ADDITIONAL_PACKAGES=""
+RUN if [ -n "$ADDITIONAL_PACKAGES" ]; then pip install --no-cache-dir $ADDITIONAL_PACKAGES; fi
+
 COPY . .
 
 ENV PYTHONPATH=/app
