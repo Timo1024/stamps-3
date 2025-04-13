@@ -21,8 +21,10 @@ services:
     container_name: fastapi_backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      # Set this to true when you want to populate the database
-      - POPULATE_DB=false
+      # Set this to true to recreate and populate database on startup
+      - POPULATE_DB=true
+      # Add this to force table drop and recreation
+      - RESET_DB=true
     ports:
       - "8000:8000"
     depends_on:
