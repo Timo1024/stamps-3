@@ -24,5 +24,11 @@ def read_set(set_id: int, db: Session = Depends(get_db)):
 
 @router.get("/{set_id}/stamps/", response_model=List[schemas.Stamp])
 def read_stamps_by_set(set_id: int, db: Session = Depends(get_db)):
+    # Check if set exists
+    db_set = db.query(models.Set).filter(models.Set.setid == set_id).first()
+    if db_set is None:
+        raise HTTPException(status_code=404, detail="Set not found")
+    
+    # Get stamps for this set
     stamps = db.query(models.Stamp).filter(models.Stamp.setid == set_id).all()
     return stamps
