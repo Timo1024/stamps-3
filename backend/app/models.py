@@ -19,7 +19,7 @@ class Set(Base):
 class Stamp(Base):
     __tablename__ = "stamps"
     
-    stampid = Column(Integer, primary_key=True, autoincrement=True)
+    stampid = Column(Integer, primary_key=True)  # Removed autoincrement=True
     number = Column(String(255))
     type = Column(String(255))
     denomination = Column(String(255))
@@ -90,7 +90,7 @@ class UserStamp(Base):
 class Theme(Base):
     __tablename__ = "themes"
     
-    themeid = Column(Integer, primary_key=True, autoincrement=True)
+    themeid = Column(Integer, primary_key=True)  # Removed autoincrement=True
     name = Column(String(255), nullable=False, unique=True)
     
     stamps = relationship("Stamp", secondary="stamp_themes", back_populates="themes")
@@ -104,7 +104,7 @@ class StampTheme(Base):
 class Image(Base):
     __tablename__ = "images"
     
-    pathid = Column(Integer, primary_key=True, autoincrement=True)
+    pathid = Column(Integer, primary_key=True)  # Removed autoincrement=True
     path = Column(String(2083), nullable=False)
     
     stamps = relationship("Stamp", secondary="stamp_images", back_populates="images")
@@ -118,7 +118,7 @@ class StampImage(Base):
 class Color(Base):
     __tablename__ = "colors"
     
-    colorid = Column(Integer, primary_key=True, autoincrement=True)
+    colorid = Column(Integer, primary_key=True)  # Removed autoincrement=True
     name = Column(String(255), nullable=False, unique=True)
     
     stamps = relationship("Stamp", secondary="stamp_colors", back_populates="colors")
