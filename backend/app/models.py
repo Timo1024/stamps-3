@@ -14,7 +14,7 @@ class Set(Base):
     name = Column(String(2083))
     set_description = Column(Text)
     
-    stamps = relationship("Stamp", back_populates="set")
+    stamps = relationship("Stamp", back_populates="set", cascade="all, delete-orphan")
 
 class Stamp(Base):
     __tablename__ = "stamps"

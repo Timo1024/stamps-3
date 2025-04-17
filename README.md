@@ -37,6 +37,12 @@ docker logs fastapi_backend
 
 - Backend API: http://localhost:8000/docs
 
+## Testing db
+
+```bash
+docker-compose exec backend python /app/run_tests_docker.py
+```
+
 ## Troubleshooting Database Issues
 
 If you encounter database errors during initialization:
