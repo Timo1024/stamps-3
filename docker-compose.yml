@@ -15,12 +15,14 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       retries: 5
+    networks:
+      - app-network
   
   backend:
     build: ./backend
     container_name: fastapi_backend
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=mysql+mysqlconnector://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}
     ports:
       - "8000:8000"
     depends_on:
@@ -30,16 +32,39 @@ services:
       - ./backend:/app
     restart: always
     healthcheck:
-      test: ["CMD", "ps", "aux", "|", "grep", "uvicorn"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    networks:
+      - app-network
+             
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5173"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 5s
-    command: >
-      sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 & 
-             sleep 5 && 
-             curl -s http://localhost:8000/ > /dev/null && 
-             tail -f /dev/null"
 
 volumes:
   db_data:
+
+networks:
+  app-network:
+    driver: bridge
