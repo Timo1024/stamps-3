@@ -8,7 +8,7 @@ def is_table_empty(db: Session, model):
     """Check if a table is empty"""
     return db.query(model).count() == 0
 
-def load_csv_to_table(db: Session, model_class, csv_path):
+def load_csv_to_table(db: Session, model_class, csv_path, column_mapping=None):
     """Load data from CSV file into specified table"""
     if not os.path.exists(csv_path):
         print(f"Warning: CSV file not found: {csv_path}")
@@ -18,13 +18,20 @@ def load_csv_to_table(db: Session, model_class, csv_path):
         # Use pandas for easy CSV handling
         df = pd.read_csv(csv_path)
         
+        # Apply column mapping if provided
+        if column_mapping:
+            df = df.rename(columns=column_mapping)
+        
         # Convert DataFrame to list of dictionaries
         records = df.to_dict('records')
         
+        # Get model columns for filtering
+        valid_columns = model_class.__table__.columns.keys()
+        
         # Insert records
         for record in records:
-            # Remove empty/NaN values
-            clean_record = {k: v for k, v in record.items() if pd.notna(v)}
+            # Remove empty/NaN values and invalid columns
+            clean_record = {k: v for k, v in record.items() if pd.notna(v) and k in valid_columns}
             db_record = model_class(**clean_record)
             db.add(db_record)
         
@@ -41,19 +48,31 @@ def initialize_data():
     print("Checking if database needs initialization...")
     db = SessionLocal()
     try:
-        # Map models to CSV files
-        model_csv_map = {
-            models.Set: "table_data/sets.csv",
-            models.Stamp: "table_data/stamps.csv",
-            # Add other models as needed
-        }
-        
-        for model, csv_file in model_csv_map.items():
-            if is_table_empty(db, model):
-                print(f"Table {model.__tablename__} is empty. Loading data...")
-                load_csv_to_table(db, model, csv_file)
+        # First load sets (parent table)
+        if is_table_empty(db, models.Set):
+            print(f"Table sets is empty. Loading data...")
+            # Map 'description' in CSV to 'set_description' in model
+            column_mapping = {'description': 'set_description'}
+            sets_loaded = load_csv_to_table(db, models.Set, "table_data/sets.csv", column_mapping)
+            
+            # Only load stamps if sets were successfully loaded
+            if sets_loaded and is_table_empty(db, models.Stamp):
+                print(f"Table stamps is empty. Loading data...")
+                load_csv_to_table(db, models.Stamp, "table_data/stamps.csv")
+            elif not sets_loaded:
+                print("Skipping stamps import because sets import failed")
+        else:
+            print(f"Table sets already has data. Skipping...")
+            
+            # Check stamps separately
+            if is_table_empty(db, models.Stamp):
+                print(f"Table stamps is empty. Loading data...")
+                load_csv_to_table(db, models.Stamp, "table_data/stamps.csv")
             else:
-                print(f"Table {model.__tablename__} already has data. Skipping...")
+                print(f"Table stamps already has data. Skipping...")
+                
+        # Add other models as needed (Theme, Color, etc.)
+        
     finally:
         db.close()
         
