@@ -3,8 +3,8 @@
 ## Starting the Application
 
 ```bash
-# Build backend with no cache to ensure fresh dependencies
-docker-compose build --no-cache backend
+# Build with no cache to ensure fresh dependencies
+docker-compose build --no-cache
 
 # Start all services in detached mode
 docker-compose up -d
@@ -36,6 +36,7 @@ docker logs fastapi_backend
 ## Access
 
 - Backend API: http://localhost:8000/docs
+- Frontend: http://localhost:5173
 
 ## Testing db
 
