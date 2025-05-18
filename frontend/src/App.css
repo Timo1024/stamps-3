@@ -56,10 +56,12 @@ body {
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
+}
+
+.page-container {
+  /* max-width: 1280px; */
+  margin: 0 0;
+  padding: 2rem 4rem;
 }

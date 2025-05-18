@@ -1,0 +1,11 @@
+.title {
+    font-size: 4rem;
+    line-height: 1.1;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ababab;
+}
+
+.page {
+    margin-top: 20px;
+}
