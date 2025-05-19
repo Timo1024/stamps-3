@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react'
 import './Home.css'
 import './Pages.css'
+import SmallCard from '../components/SmallCard';
 
 const Home: React.FC = () => {
     const [message, setMessage] = useState('')
@@ -36,6 +37,22 @@ const Home: React.FC = () => {
         <div className="page">
             <div className='home'>
                 <div className='title'>Welcome back!</div>
+
+                <div className="cards-container">
+                    <SmallCard
+                        title="Search Catalogue"
+                        // description="Browse our complete collection of stamps from various countries and time periods."
+                        imageSrc="/src/assets/search.svg"
+                        linkTo="/catalogue"
+                    />
+
+                    <SmallCard
+                        title="View Collection"
+                        // description="View and manage your personal stamp collection. Track your favorites and wishlist."
+                        imageSrc="/src/assets/collection.svg"
+                        linkTo="/collection"
+                    />
+                </div>
 
 
 

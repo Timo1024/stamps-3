@@ -10,6 +10,16 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 
+### When just looking at frontent
+
+```bash
+cd frontend
+npm install
+npm run dev:local
+```
+
+http://localhost:5173
+
 ## Stopping the Application
 
 ```bash
