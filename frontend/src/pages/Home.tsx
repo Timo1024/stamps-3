@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import './Home.css'
 import './Pages.css'
 import SmallCard from '../components/SmallCard';
+import Card from '../components/Card';
 
 const Home: React.FC = () => {
     const [message, setMessage] = useState('')
@@ -57,14 +58,22 @@ const Home: React.FC = () => {
 
 
                 {/* Backend status message */}
-                <div className="card">
-                    {loading ? (
-                        <p>Loading message from backend...</p>
-                    ) : error ? (
-                        <p>Error connecting to backend: {error}</p>
-                    ) : (
-                        <p>Backend says: {message}</p>
-                    )}
+                <div className="home-stats-wrapper">
+                    <Card className='home-stats'>
+                        {loading ? (
+                            <p>Loading message from backend...</p>
+                        ) : error ? (
+                            <p>Error connecting to backend: {error}</p>
+                        ) : (
+                            <p>Backend says: {message}</p>
+                        )}
+                    </Card>
+                    {/* add n cards (using a loop) with placeholder content */}
+                    {Array.from({ length: 10 }).map((_, idx) => (
+                        <Card className='home-stats' key={idx}>
+                            <p>Placeholder card {idx + 1}</p>
+                        </Card>
+                    ))}
                 </div>
             </div>
         </div>

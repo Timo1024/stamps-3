@@ -8,6 +8,12 @@
     padding: 1.5rem 4rem;
     /* height: 60px; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* Ensure navbar stays on top of other content */
 }
 
 .navbar-brand {

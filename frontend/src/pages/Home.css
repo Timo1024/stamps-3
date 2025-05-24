@@ -15,4 +15,24 @@
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* grid with three columns */
+.home-stats-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 0px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.home-stats {
+    text-align: center;
+    color: white;
+    min-height: 200px;
+    /* This should now work without issues */
+    position: relative;
+    /* Ensures proper stacking context */
 }

@@ -1,0 +1,20 @@
+.card {
+    background-color: #242424;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 1rem;
+    /* remove border */
+    border: none;
+}
+
+/* .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+} */
+
+/* Add interactive styling when it's clickable */
+.card[onClick]:not([onClick=""]) {
+    cursor: pointer;
+}

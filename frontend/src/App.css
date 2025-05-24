@@ -7,7 +7,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
 }
 
@@ -62,7 +62,9 @@ body {
 }
 
 .page-container {
-  /* max-width: 1280px; */
-  margin: 0 0;
-  padding: 2rem 4rem;
+  margin: 0;
+  /* Add top padding to account for fixed navbar height */
+  padding: 8rem 4rem 2rem 4rem;
+  /* Increased top padding to ensure content is visible */
+  width: 100%;
 }

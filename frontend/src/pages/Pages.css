@@ -4,8 +4,13 @@
     font-weight: bold;
     margin-bottom: 1rem;
     color: #f0f0f0;
+    margin-top: 0;
+    /* Ensure the title doesn't have extra top margin */
 }
 
 .page {
-    margin-top: 20px;
+    margin-top: 0;
+    /* Remove this margin since we already have padding in page-container */
+    padding-top: 0;
+    /* Start content flush with the container padding */
 }
