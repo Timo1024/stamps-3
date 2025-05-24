@@ -12,12 +12,12 @@ services:
     ports:
       - "3307:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       retries: 5
     networks:
       - app-network
-  
+
   backend:
     build: ./backend
     container_name: fastapi_backend
@@ -32,7 +32,7 @@ services:
       - ./backend:/app
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -40,7 +40,7 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     networks:
       - app-network
-             
+
   frontend:
     build: ./frontend
     container_name: react_frontend
@@ -52,11 +52,14 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Enable polling for file changes
+      - WDS_SOCKET_PORT=0 # Required for HMR to work through Docker
     networks:
       - app-network
     restart: always
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:5173"]
+      test: [ "CMD", "wget", "-qO-", "http://localhost:5173" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -64,6 +67,7 @@ services:
 
 volumes:
   db_data:
+
 
 networks:
   app-network:
