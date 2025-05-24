@@ -1,9 +1,14 @@
 import React from 'react';
+import './Pages.css'
+import './Catalogue.css';
 
 const Catalogue: React.FC = () => {
     return (
         <div className="page">
-            <h1>Stamps Catalogue</h1>
+
+
+
+            <div className='catalogue-heading'>Stamps Catalogue</div>
             <p>Browse the complete catalogue of available stamps.</p>
         </div>
     );
