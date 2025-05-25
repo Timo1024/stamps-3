@@ -1,5 +1,228 @@
+.catalogue-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: calc(100vh - 6rem);
+    bottom: 0;
+    /* Account for navbar and padding */
+}
+
 .catalogue-heading {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: #f0f0f0;
+    padding-left: 3rem;
+}
+
+.catalogue-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: calc(100vh - 6rem);
+    /* Account for navbar and padding */
+}
+
+.catalogue-sidebar {
+    min-width: 20rem;
+    background-color: #242424;
+    border-radius: 0px 8px 0px 0px;
+    padding: 1.5rem;
+    padding-left: 3rem;
+    padding-right: 2rem;
+    /* Add extra padding on the right for the scrollbar */
+    height: 100%;
+    overflow-y: auto;
+    position: sticky;
+    top: 0rem;
+    transition: transform 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+    z-index: 5;
+    box-sizing: border-box;
+
+    /* Webkit browsers (Chrome, Safari, newer versions of Opera, etc) */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        /* margin: 8px 0;
+        box-shadow: inset 0 0 10px 10px green;
+        border: solid 3px transparent; */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(155, 155, 155, 0.5);
+        border-radius: 4px;
+        /* border: none; */
+        /* box-shadow: inset 0 0 10px 10px red; */
+        /* border: solid 3px transparent; */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(155, 155, 155, 0.7);
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+    scrollbar-gutter: stable;
+}
+
+.catalogue-sidebar.hidden {
+    transform: translateX(-90%);
+}
+
+.catalogue-content {
+    flex: 1;
+    padding-right: 1rem;
+    overflow-y: auto;
+    transition: padding-left 0.3s ease;
+}
+
+.catalogue-content.expanded {
+    padding-left: 1rem;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    left: 250px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 40px;
+    background-color: #242424;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.3s ease;
+    z-index: 10;
+}
+
+.sidebar-toggle.shifted {
+    left: 0;
+}
+
+.sidebar-toggle:hover {
+    background-color: #333;
+}
+
+.catalogue-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #f0f0f0;
+}
+
+.sidebar-section {
+    margin-bottom: 2rem;
+}
+
+.sidebar-heading {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav-item {
+    padding: 0.75rem 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #ccc;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav-item:hover {
+    background-color: #333;
+}
+
+.sidebar-nav-item.active {
+    background-color: #333;
+    color: #21ecf0;
+    font-weight: 500;
+}
+
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: #333;
+    border: 1px solid #444;
+    color: #f0f0f0;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: #21ecf0;
+}
+
+.year-range {
+    margin-bottom: 1rem;
+}
+
+.year-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.year-inputs input {
+    width: 45%;
+}
+
+.year-inputs span {
+    color: #ccc;
+}
+
+.apply-filters-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #21ecf0;
+    color: #242424;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.apply-filters-btn:hover {
+    background-color: #19c8cc;
+}
+
+.catalogue-results {
+    margin-top: 2rem;
+    min-height: 300px;
 }

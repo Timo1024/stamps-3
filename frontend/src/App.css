@@ -64,7 +64,8 @@ body {
 .page-container {
   margin: 0;
   /* Add top padding to account for fixed navbar height */
-  padding: 6rem 4rem 2rem 4rem;
+  /* padding: 6rem 4rem 2rem 4rem; */
+  padding: 6rem 0rem 0rem 0rem;
   /* Increased top padding to ensure content is visible */
   width: 100%;
   min-height: 100vh;
