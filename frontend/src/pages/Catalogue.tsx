@@ -4,7 +4,6 @@ import './Catalogue.css';
 
 const Catalogue: React.FC = () => {
     const [viewMode, setViewMode] = useState<'individual' | 'country' | 'year'>('individual');
-    const [sidebarVisible, setSidebarVisible] = useState(true);
     const [filters, setFilters] = useState({
         country: '',
         yearFrom: '',
@@ -21,17 +20,13 @@ const Catalogue: React.FC = () => {
         }));
     };
 
-    const toggleSidebar = () => {
-        setSidebarVisible(!sidebarVisible);
-    };
-
     return (
         <div className="page catalogue-container">
             <div className='catalogue-heading'>Stamps Catalogue</div>
             <div className="catalogue-content">
-                <div className={`catalogue-sidebar ${sidebarVisible ? 'visible' : 'hidden'}`}>
+                <div className={`catalogue-sidebar`}>
                     <div className="sidebar-section">
-                        <h3 className="sidebar-heading">View Options</h3>
+                        <div className="sidebar-heading">View Options</div>
                         <ul className="sidebar-nav">
                             <li
                                 className={`sidebar-nav-item ${viewMode === 'individual' ? 'active' : ''}`}
@@ -55,7 +50,7 @@ const Catalogue: React.FC = () => {
                     </div>
 
                     <div className="sidebar-section">
-                        <h3 className="sidebar-heading">Filters</h3>
+                        <div className="sidebar-heading">Filters</div>
                         <div className="filter-group">
                             <label htmlFor="country">Country</label>
                             <select
@@ -131,20 +126,14 @@ const Catalogue: React.FC = () => {
                     </div>
                 </div>
 
-                <button
-                    className={`sidebar-toggle ${sidebarVisible ? '' : 'shifted'}`}
-                    onClick={toggleSidebar}
-                    aria-label={sidebarVisible ? "Hide sidebar" : "Show sidebar"}
-                >
-                    {sidebarVisible ? '←' : '→'}
-                </button>
-
-                <div className={`catalogue-content ${sidebarVisible ? '' : 'expanded'}`}>
+                <div className={`catalogue-content`}>
 
                     {/* Content area that will change based on the view mode and filters */}
                     <div className="catalogue-results">
                         <p>Showing {viewMode} view with selected filters.</p>
-                        {/* Stamps will be displayed here */}
+
+                        {/* show meta results from backend */}
+
                     </div>
                 </div>
             </div>
