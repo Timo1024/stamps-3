@@ -20,6 +20,12 @@ npm run dev:local
 
 http://localhost:5173
 
+Start backend and database in the background to get the frontend working:
+
+```bash
+docker-compose up -d database backend
+```
+
 ## Stopping the Application
 
 ```bash

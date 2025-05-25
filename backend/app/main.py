@@ -4,7 +4,7 @@ import os
 
 from . import models
 from .database import engine
-from .routes import base, sets, stamps
+from .routes import base, sets, stamps, themes
 from . import data_init
 
 # Create database tables
@@ -21,6 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.on_event("startup")
 async def startup_db_client():
     """Initialize database on application startup"""
@@ -31,3 +32,4 @@ async def startup_db_client():
 app.include_router(base.router)
 app.include_router(sets.router)
 app.include_router(stamps.router)
+app.include_router(themes.router)
