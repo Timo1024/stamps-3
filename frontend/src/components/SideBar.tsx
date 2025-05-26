@@ -84,6 +84,9 @@ const SideBar: React.FC = () => {
     const [showThemeDropdown, setShowThemeDropdown] = useState(false);
     const themeContainerRef = useRef<HTMLDivElement>(null);
 
+    // keywords
+    const [keywordsText, setKeywordsText] = useState('');
+
     // date from to
     const [dateRange, setDateRange] = useState<DateRange | null>(null);
 
@@ -146,6 +149,11 @@ const SideBar: React.FC = () => {
         fetchData();
     }, []);
 
+    // log when searchParams change
+    useEffect(() => {
+        console.log('Search parameters updated:', searchParams);
+    }, [searchParams]);
+
     const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFilters(prev => ({
@@ -207,6 +215,39 @@ const SideBar: React.FC = () => {
     const selectTheme = (theme: string) => {
         handleChange('theme', theme);
         setShowThemeDropdown(false);
+    };
+
+    // category
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        handleChange('category', value);
+
+        // Filter categories based on input
+        if (value) {
+            const filtered = categories.filter(category =>
+                category.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilteredCategories(filtered);
+            setShowCategoryDropdown(true);
+        } else {
+            setFilteredCategories([]);
+            setShowCategoryDropdown(false);
+        }
+    };
+
+    const selectCategory = (category: string) => {
+        handleChange('category', category);
+        setShowCategoryDropdown(false);
+    };
+
+    // keyword
+
+    const handleKeywordsChange = (value: string) => {
+        setKeywordsText(value);
+        // Only split into keywords when submitting or when there's actual content
+        const keywords = value.trim() ? value.split(',').map(k => k.trim()).filter(k => k) : [];
+        handleChange('keywords', keywords);
     };
 
     return (
@@ -293,6 +334,36 @@ const SideBar: React.FC = () => {
                         )}
                     </div>
 
+                    {/* category */}
+                    <div className="autocomplete-container" ref={categoryContainerRef}>
+                        <div className="single-input">
+                            <div className={`single-input-title ${searchParams.category ? 'visible' : ''}`}>Category</div>
+                            <input
+                                type="text"
+                                placeholder="Category"
+                                value={searchParams.category || ''}
+                                onChange={handleCategoryChange}
+                                onFocus={() => setShowCategoryDropdown(true)}
+                                autoComplete="new-password"
+                                autoCorrect="off"
+                                spellCheck="false"
+                            />
+                        </div>
+                        {showCategoryDropdown && filteredCategories.length > 0 && (
+                            <div className="autocomplete-dropdown">
+                                {filteredCategories.map((category, index) => (
+                                    <div
+                                        key={index}
+                                        className="autocomplete-item"
+                                        onClick={() => selectCategory(category)}
+                                    >
+                                        {category}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
                     {/* year range */}
                     <div className="input-group">
                         <div className="single-input">
@@ -331,34 +402,46 @@ const SideBar: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="filter-group">
-                        <label htmlFor="size">Size</label>
-                        <select
-                            id="size"
-                            name="size"
-                            value={filters.size}
-                            onChange={handleFilterChange}
-                        >
-                            <option value="">All Sizes</option>
-                            <option value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                        </select>
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.denomination ? 'visible' : ''}`}>Denomination</div>
+                        <input
+                            type="number"
+                            placeholder="Denomination"
+                            value={searchParams.denomination || ''}
+                            onChange={(e) => handleChange('denomination', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', ".", ","].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
                     </div>
 
-                    <div className="filter-group">
-                        <label htmlFor="owned">Ownership</label>
-                        <select
-                            id="owned"
-                            name="owned"
-                            value={filters.owned}
-                            onChange={handleFilterChange}
-                        >
-                            <option value="all">All Stamps</option>
-                            <option value="owned">Owned</option>
-                            <option value="not-owned">Not Owned</option>
-                            <option value="wishlist">Wishlist</option>
-                        </select>
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.keywords ? 'visible' : ''}`}>Keywords (comma-separated)</div>
+                        <textarea
+                            placeholder="Keywords (comma-separated)"
+                            value={keywordsText}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                handleKeywordsChange(value);
+                                // Auto-adjust height only if content exceeds initial height
+                                if (e.target.scrollHeight > 57) {
+                                    e.target.style.height = 'auto';
+                                    e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                                } else {
+                                    e.target.style.height = '57px';
+                                }
+                            }}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            rows={1}
+                            className="keywords-textarea"
+                        />
                     </div>
 
                 </div>
