@@ -16,12 +16,11 @@ interface SearchParams {
     // username: string;
     show_owned: boolean;
     country: string | null;
-    year_from: string | null;
-    year_to: string | null;
+    date_from: string | null;
+    date_to: string | null;
     denomination: string | null;
     theme: string | null;
     keywords: string[] | null;
-    date_of_issue: string | null;
     category: string | null;
     number_issued: string | null;
     perforation_horizontal: string | null;
@@ -44,12 +43,11 @@ const SideBar: React.FC = () => {
         // username: '',
         show_owned: false,
         country: null,
-        year_from: null,
-        year_to: null,
+        date_from: null,
+        date_to: null,
         denomination: null,
         theme: null,
         keywords: null,
-        date_of_issue: null,
         category: null,
         number_issued: null,
         perforation_horizontal: null,
@@ -91,17 +89,8 @@ const SideBar: React.FC = () => {
     const [dateRange, setDateRange] = useState<DateRange | null>(null);
 
     const [viewMode, setViewMode] = useState<'individual' | 'grouped'>('individual');
-    const [filters, setFilters] = useState({
-        country: '',
-        yearFrom: '',
-        yearTo: '',
-        size: '',
-        owned: 'all'
-    });
 
     // State for API data
-    // const [setStats, setSetStats] = useState<SetStats | null>(null);
-    // const [dateRange, setDateRange] = useState<DateRange | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -137,7 +126,7 @@ const SideBar: React.FC = () => {
 
                 setDateRange(dateRangeData);
 
-                setError(null);
+                // setError(null);
             } catch (err) {
                 console.error('Error fetching catalogue data:', err);
                 setError(err instanceof Error ? err.message : 'Unknown error occurred');
@@ -153,14 +142,6 @@ const SideBar: React.FC = () => {
     useEffect(() => {
         console.log('Search parameters updated:', searchParams);
     }, [searchParams]);
-
-    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFilters(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
 
     const handleChange = (field: keyof SearchParams, value: any) => {
         setSearchParams((prev) => ({
@@ -250,6 +231,21 @@ const SideBar: React.FC = () => {
         handleChange('keywords', keywords);
     };
 
+    // Format date for input element (YYYY-MM-DD)
+    const formatDateForInput = (dateString: string | null): string => {
+        if (!dateString) return '';
+        // Ensure we have a valid date string
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return '';
+
+            return date.toISOString().split('T')[0]; // Returns YYYY-MM-DD format
+        } catch (e) {
+            console.error('Invalid date:', dateString);
+            return '';
+        }
+    };
+
     return (
         <div className={`catalogue-sidebar`}>
             <div className="filter-options">
@@ -273,6 +269,18 @@ const SideBar: React.FC = () => {
 
                 <div className="sidebar-section">
                     <div className="sidebar-heading">Filters</div>
+
+                    {/* show_owned toggle */}
+                    <div className="single-input">
+                        <label className="checkbox-label">
+                            <input
+                                type="checkbox"
+                                checked={searchParams.show_owned}
+                                onChange={(e) => handleChange('show_owned', e.target.checked)}
+                            />
+                            Show Owned Stamps
+                        </label>
+                    </div>
 
                     {/* countries */}
                     <div className="autocomplete-container" ref={countryContainerRef}>
@@ -364,44 +372,35 @@ const SideBar: React.FC = () => {
                         )}
                     </div>
 
-                    {/* year range */}
+                    {/* year range - updated to use date inputs */}
                     <div className="input-group">
                         <div className="single-input">
-                            <div className={`single-input-title ${searchParams.year_from ? 'visible' : ''}`}>Year From</div>
+                            <div className={`single-input-title ${searchParams.date_from ? 'visible' : ''}`}>Date From</div>
                             <input
-                                type="number"
-                                placeholder={dateRange?.min_date?.slice(0, 4) || 'Year From'}
-                                value={searchParams.year_from || ''}
-                                onChange={(e) => handleChange('year_from', e.target.value)}
-                                autoComplete="new-password"
-                                autoCorrect="off"
-                                spellCheck="false"
-                                onKeyDown={(e) => {
-                                    if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
-                                        e.preventDefault();
-                                    }
-                                }}
+                                type="date"
+                                placeholder="Date From"
+                                value={searchParams.date_from || ''}
+                                min={dateRange?.min_date ? formatDateForInput(dateRange.min_date) : ''}
+                                max={dateRange?.max_date ? formatDateForInput(dateRange.max_date) : ''}
+                                onChange={(e) => handleChange('date_from', e.target.value)}
+                                autoComplete="off"
                             />
                         </div>
                         <div className="single-input">
-                            <div className={`single-input-title ${searchParams.year_to ? 'visible' : ''}`}>Year To</div>
+                            <div className={`single-input-title ${searchParams.date_to ? 'visible' : ''}`}>Date To</div>
                             <input
-                                type="number"
-                                placeholder={dateRange?.max_date?.slice(0, 4) || 'Year To'}
-                                value={searchParams.year_to || ''}
-                                onChange={(e) => handleChange('year_to', e.target.value)}
-                                autoComplete="new-password"
-                                autoCorrect="off"
-                                spellCheck="false"
-                                onKeyDown={(e) => {
-                                    if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
-                                        e.preventDefault();
-                                    }
-                                }}
+                                type="date"
+                                placeholder="Date To"
+                                value={searchParams.date_to || ''}
+                                min={dateRange?.min_date ? formatDateForInput(dateRange.min_date) : ''}
+                                max={dateRange?.max_date ? formatDateForInput(dateRange.max_date) : ''}
+                                onChange={(e) => handleChange('date_to', e.target.value)}
+                                autoComplete="off"
                             />
                         </div>
                     </div>
 
+                    {/* denomination */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.denomination ? 'visible' : ''}`}>Denomination</div>
                         <input
@@ -441,6 +440,215 @@ const SideBar: React.FC = () => {
                             spellCheck="false"
                             rows={1}
                             className="keywords-textarea"
+                        />
+                    </div>
+
+                    {/* number_issued */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.number_issued ? 'visible' : ''}`}>Number Issued</div>
+                        <input
+                            type="number"
+                            placeholder="Number Issued"
+                            value={searchParams.number_issued || ''}
+                            onChange={(e) => handleChange('number_issued', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* perforation_horizontal */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.perforation_horizontal ? 'visible' : ''}`}>Perforation Horizontal</div>
+                        <input
+                            type="number"
+                            placeholder="Perforation Horizontal"
+                            value={searchParams.perforation_horizontal || ''}
+                            onChange={(e) => handleChange('perforation_horizontal', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* perforation_vertical */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.perforation_vertical ? 'visible' : ''}`}>Perforation Vertical</div>
+                        <input
+                            type="number"
+                            placeholder="Perforation Vertical"
+                            value={searchParams.perforation_vertical || ''}
+                            onChange={(e) => handleChange('perforation_vertical', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* sheet_size_amount */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.sheet_size_amount ? 'visible' : ''}`}>Sheet Size Amount</div>
+                        <input
+                            type="number"
+                            placeholder="Sheet Size Amount"
+                            value={searchParams.sheet_size_amount || ''}
+                            onChange={(e) => handleChange('sheet_size_amount', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* sheet_size_horizontal */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.sheet_size_horizontal ? 'visible' : ''}`}>Sheet Size Horizontal</div>
+                        <input
+                            type="number"
+                            placeholder="Sheet Size Horizontal"
+                            value={searchParams.sheet_size_horizontal || ''}
+                            onChange={(e) => handleChange('sheet_size_horizontal', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* sheet_size_vertical */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.sheet_size_vertical ? 'visible' : ''}`}>Sheet Size Vertical</div>
+                        <input
+                            type="number"
+                            placeholder="Sheet Size Vertical"
+                            value={searchParams.sheet_size_vertical || ''}
+                            onChange={(e) => handleChange('sheet_size_vertical', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* stamp_size_horizontal */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.stamp_size_horizontal ? 'visible' : ''}`}>Stamp Size Horizontal</div>
+                        <input
+                            type="number"
+                            placeholder="Stamp Size Horizontal"
+                            value={searchParams.stamp_size_horizontal || ''}
+                            onChange={(e) => handleChange('stamp_size_horizontal', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* stamp_size_vertical */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.stamp_size_vertical ? 'visible' : ''}`}>Stamp Size Vertical</div>
+                        <input
+                            type="number"
+                            placeholder="Stamp Size Vertical"
+                            value={searchParams.stamp_size_vertical || ''}
+                            onChange={(e) => handleChange('stamp_size_vertical', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* color stuff */}
+
+                    {/* hue */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.hue ? 'visible' : ''}`}>Hue</div>
+                        <input
+                            type="number"
+                            placeholder="Hue (0-360)"
+                            value={searchParams.hue || ''}
+                            onChange={(e) => handleChange('hue', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+                    {/* saturation */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.saturation ? 'visible' : ''}`}>Saturation</div>
+                        <input
+                            type="number"
+                            placeholder="Saturation (0-100)"
+                            value={searchParams.saturation || ''}
+                            onChange={(e) => handleChange('saturation', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+                    {/* tolerance */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.tolerance ? 'visible' : ''}`}>Tolerance</div>
+                        <input
+                            type="number"
+                            placeholder="Tolerance (0-100)"
+                            value={searchParams.tolerance || ''}
+                            onChange={(e) => handleChange('tolerance', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                     </div>
 

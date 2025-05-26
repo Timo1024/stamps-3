@@ -177,3 +177,20 @@
 .apply-filters-btn:hover {
     background-color: #19c8cc;
 }
+
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #333;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    /* Makes the calendar icon white */
+    cursor: pointer;
+}
