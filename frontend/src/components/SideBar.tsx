@@ -94,6 +94,32 @@ const SideBar: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    // Add a new interface for validation errors
+    interface ValidationErrors {
+        hue?: string;
+        saturation?: string;
+        tolerance?: string;
+        category?: string;
+        country?: string;
+        date_from?: string;
+        date_to?: string;
+        denomination?: string;
+        keywords?: string;
+        max_results?: string;
+        number_issued?: string;
+        perforation_horizontal?: string;
+        perforation_vertical?: string;
+        sheet_size_amount?: string;
+        sheet_size_horizontal?: string;
+        sheet_size_vertical?: string;
+        stamp_size_horizontal?: string;
+        stamp_size_vertical?: string;
+        theme?: string;
+    }
+
+    // Add state for validation errors
+    const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+
     // Fetch data from backend
     useEffect(() => {
         const fetchData = async () => {
@@ -143,7 +169,218 @@ const SideBar: React.FC = () => {
         console.log('Search parameters updated:', searchParams);
     }, [searchParams]);
 
+    // Validate input based on field name and value
+    const validateField = (field: keyof SearchParams, value: any): string | undefined => {
+        // Skip validation if value is empty/null
+        if (value === null || value === '') {
+            return undefined;
+        }
+
+        switch (field) {
+            case 'hue':
+                const hueValue = Number(value);
+                if (isNaN(hueValue)) {
+                    return 'Hue must be a number';
+                }
+                if (hueValue < 0 || hueValue > 360) {
+                    return 'Hue must be between 0 and 360';
+                }
+                break;
+
+            case 'saturation':
+                const saturationValue = Number(value);
+                if (isNaN(saturationValue)) {
+                    return 'Saturation must be a number';
+                }
+                if (saturationValue < 0 || saturationValue > 100) {
+                    return 'Saturation must be between 0 and 100';
+                }
+                break;
+
+            case 'tolerance':
+                const toleranceValue = Number(value);
+                if (isNaN(toleranceValue)) {
+                    return 'Tolerance must be a number';
+                }
+                if (toleranceValue < 5 || toleranceValue > 30) {
+                    return 'Tolerance must be between 5 and 30';
+                }
+                break;
+
+            case 'category':
+                // check if category is in the predefined list
+                if (!categories.includes(value)) {
+                    return `Category doesn't exist. Please select from the list.`;
+                }
+                break;
+
+            case 'country':
+                // check if country is in the predefined list
+                if (!countries.includes(value)) {
+                    return `Country doesn't exist. Please select from the list.`;
+                }
+                break;
+
+            case 'date_from':
+                // Check if date is in valid format (YYYY-MM-DD)
+                const dateFrom = new Date(value);
+                if (isNaN(dateFrom.getTime())) {
+                    return 'Invalid date format for "Date From"';
+                }
+                // Check if date is before the minimum date
+                if (dateRange?.min_date && dateFrom < new Date(dateRange.min_date)) {
+                    return `Date From cannot be before ${dateRange.min_date}`;
+                }
+                break;
+
+            case 'date_to':
+                // Check if date is in valid format (YYYY-MM-DD)
+                const dateTo = new Date(value);
+                if (isNaN(dateTo.getTime())) {
+                    return 'Invalid date format for "Date To"';
+                }
+                // Check if date is after the maximum date
+                if (dateRange?.max_date && dateTo > new Date(dateRange.max_date)) {
+                    return `Date To cannot be after ${dateRange.max_date}`;
+                }
+                // Check if "Date To" is before "Date From"
+                if (searchParams.date_from && dateTo < new Date(searchParams.date_from)) {
+                    return '"Date To" cannot be before "Date From"';
+                }
+                break;
+
+            case 'denomination':
+                const denominationValue = Number(value);
+                if (isNaN(denominationValue)) {
+                    return 'Denomination must be a number';
+                }
+                if (denominationValue < 0) {
+                    return 'Denomination cannot be negative';
+                }
+                break;
+
+            case 'keywords':
+                // no validaiton necessary
+                break;
+
+            case 'max_results':
+                const maxResultsValue = Number(value);
+                if (isNaN(maxResultsValue)) {
+                    return 'Max results must be a number';
+                }
+                if (maxResultsValue < 1 || maxResultsValue > 10000) {
+                    return 'Max results must be between 1 and 10,000 when view option is individual';
+                }
+                break;
+
+            case 'number_issued':
+                const numberIssuedValue = Number(value);
+                if (isNaN(numberIssuedValue)) {
+                    return 'Number issued must be a number';
+                }
+                if (numberIssuedValue < 0) {
+                    return 'Number issued cannot be negative';
+                }
+                break;
+
+            case 'perforation_horizontal':
+                const perforationHorizontalValue = Number(value);
+                if (isNaN(perforationHorizontalValue)) {
+                    return 'Perforation horizontal must be a number';
+                }
+                if (perforationHorizontalValue < 0) {
+                    return 'Perforation horizontal cannot be negative';
+                }
+                break;
+
+            case 'perforation_vertical':
+                const perforationVerticalValue = Number(value);
+                if (isNaN(perforationVerticalValue)) {
+                    return 'Perforation vertical must be a number';
+                }
+                if (perforationVerticalValue < 0) {
+                    return 'Perforation vertical cannot be negative';
+                }
+                break;
+
+            case 'sheet_size_amount':
+                const sheetSizeAmountValue = Number(value);
+                if (isNaN(sheetSizeAmountValue)) {
+                    return 'Sheet size amount must be a number';
+                }
+                if (sheetSizeAmountValue < 0) {
+                    return 'Sheet size amount cannot be negative';
+                }
+                break;
+
+            case 'sheet_size_horizontal':
+                const sheetSizeHorizontalValue = Number(value);
+                if (isNaN(sheetSizeHorizontalValue)) {
+                    return 'Sheet size horizontal must be a number';
+                }
+                if (sheetSizeHorizontalValue < 0) {
+                    return 'Sheet size horizontal cannot be negative';
+                }
+                break;
+
+            case 'sheet_size_vertical':
+                const sheetSizeVerticalValue = Number(value);
+                if (isNaN(sheetSizeVerticalValue)) {
+                    return 'Sheet size vertical must be a number';
+                }
+                if (sheetSizeVerticalValue < 0) {
+                    return 'Sheet size vertical cannot be negative';
+                }
+                break;
+
+            case 'stamp_size_horizontal':
+                const stampSizeHorizontalValue = Number(value);
+                if (isNaN(stampSizeHorizontalValue)) {
+                    return 'Stamp size horizontal must be a number';
+                }
+                if (stampSizeHorizontalValue < 0) {
+                    return 'Stamp size horizontal cannot be negative';
+                }
+                break;
+
+            case 'stamp_size_vertical':
+                const stampSizeVerticalValue = Number(value);
+                if (isNaN(stampSizeVerticalValue)) {
+                    return 'Stamp size vertical must be a number';
+                }
+                if (stampSizeVerticalValue < 0) {
+                    return 'Stamp size vertical cannot be negative';
+                }
+                break;
+
+            case 'theme':
+                // check if theme is in the predefined list
+                if (!themes.includes(value)) {
+                    return `Theme doesn't exist. Please select from the list.`;
+                }
+                break;
+
+            // Add cases for other fields as needed
+
+            default:
+                return undefined;
+        }
+
+        return undefined; // No error
+    };
+
     const handleChange = (field: keyof SearchParams, value: any) => {
+        // Validate the field
+        const error = validateField(field, value);
+
+        // Update validation errors
+        setValidationErrors(prev => ({
+            ...prev,
+            [field]: error
+        }));
+
+        // Update search params even if there's an error
+        // (we'll show the error but still allow typing)
         setSearchParams((prev) => ({
             ...prev,
             [field]: value,
@@ -286,6 +523,9 @@ const SideBar: React.FC = () => {
                     <div className="autocomplete-container" ref={countryContainerRef}>
                         <div className="single-input">
                             <div className={`single-input-title ${searchParams.country ? 'visible' : ''}`}>Country</div>
+                            {validationErrors.country && (
+                                <div className="validation-error">{validationErrors.country}</div>
+                            )}
                             <input
                                 type="text"
                                 placeholder="Country"
@@ -316,6 +556,9 @@ const SideBar: React.FC = () => {
                     <div className="autocomplete-container" ref={themeContainerRef}>
                         <div className="single-input">
                             <div className={`single-input-title ${searchParams.theme ? 'visible' : ''}`}>Theme</div>
+                            {validationErrors.theme && (
+                                <div className="validation-error">{validationErrors.theme}</div>
+                            )}
                             <input
                                 type="text"
                                 placeholder="Theme"
@@ -346,6 +589,9 @@ const SideBar: React.FC = () => {
                     <div className="autocomplete-container" ref={categoryContainerRef}>
                         <div className="single-input">
                             <div className={`single-input-title ${searchParams.category ? 'visible' : ''}`}>Category</div>
+                            {validationErrors.category && (
+                                <div className="validation-error">{validationErrors.category}</div>
+                            )}
                             <input
                                 type="text"
                                 placeholder="Category"
@@ -376,6 +622,9 @@ const SideBar: React.FC = () => {
                     <div className="input-group">
                         <div className="single-input">
                             <div className={`single-input-title ${searchParams.date_from ? 'visible' : ''}`}>Date From</div>
+                            {validationErrors.date_from && (
+                                <div className="validation-error">{validationErrors.date_from}</div>
+                            )}
                             <input
                                 type="date"
                                 placeholder="Date From"
@@ -388,6 +637,9 @@ const SideBar: React.FC = () => {
                         </div>
                         <div className="single-input">
                             <div className={`single-input-title ${searchParams.date_to ? 'visible' : ''}`}>Date To</div>
+                            {validationErrors.date_to && (
+                                <div className="validation-error">{validationErrors.date_to}</div>
+                            )}
                             <input
                                 type="date"
                                 placeholder="Date To"
@@ -403,6 +655,9 @@ const SideBar: React.FC = () => {
                     {/* denomination */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.denomination ? 'visible' : ''}`}>Denomination</div>
+                        {validationErrors.denomination && (
+                            <div className="validation-error">{validationErrors.denomination}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Denomination"
@@ -421,6 +676,9 @@ const SideBar: React.FC = () => {
 
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.keywords ? 'visible' : ''}`}>Keywords (comma-separated)</div>
+                        {validationErrors.keywords && (
+                            <div className="validation-error">{validationErrors.keywords}</div>
+                        )}
                         <textarea
                             placeholder="Keywords (comma-separated)"
                             value={keywordsText}
@@ -446,6 +704,9 @@ const SideBar: React.FC = () => {
                     {/* number_issued */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.number_issued ? 'visible' : ''}`}>Number Issued</div>
+                        {validationErrors.number_issued && (
+                            <div className="validation-error">{validationErrors.number_issued}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Number Issued"
@@ -465,6 +726,9 @@ const SideBar: React.FC = () => {
                     {/* perforation_horizontal */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.perforation_horizontal ? 'visible' : ''}`}>Perforation Horizontal</div>
+                        {validationErrors.perforation_horizontal && (
+                            <div className="validation-error">{validationErrors.perforation_horizontal}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Perforation Horizontal"
@@ -484,6 +748,9 @@ const SideBar: React.FC = () => {
                     {/* perforation_vertical */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.perforation_vertical ? 'visible' : ''}`}>Perforation Vertical</div>
+                        {validationErrors.perforation_vertical && (
+                            <div className="validation-error">{validationErrors.perforation_vertical}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Perforation Vertical"
@@ -503,6 +770,9 @@ const SideBar: React.FC = () => {
                     {/* sheet_size_amount */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.sheet_size_amount ? 'visible' : ''}`}>Sheet Size Amount</div>
+                        {validationErrors.sheet_size_amount && (
+                            <div className="validation-error">{validationErrors.sheet_size_amount}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Sheet Size Amount"
@@ -522,6 +792,9 @@ const SideBar: React.FC = () => {
                     {/* sheet_size_horizontal */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.sheet_size_horizontal ? 'visible' : ''}`}>Sheet Size Horizontal</div>
+                        {validationErrors.sheet_size_horizontal && (
+                            <div className="validation-error">{validationErrors.sheet_size_horizontal}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Sheet Size Horizontal"
@@ -541,6 +814,9 @@ const SideBar: React.FC = () => {
                     {/* sheet_size_vertical */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.sheet_size_vertical ? 'visible' : ''}`}>Sheet Size Vertical</div>
+                        {validationErrors.sheet_size_vertical && (
+                            <div className="validation-error">{validationErrors.sheet_size_vertical}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Sheet Size Vertical"
@@ -560,6 +836,9 @@ const SideBar: React.FC = () => {
                     {/* stamp_size_horizontal */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.stamp_size_horizontal ? 'visible' : ''}`}>Stamp Size Horizontal</div>
+                        {validationErrors.stamp_size_horizontal && (
+                            <div className="validation-error">{validationErrors.stamp_size_horizontal}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Stamp Size Horizontal"
@@ -579,6 +858,9 @@ const SideBar: React.FC = () => {
                     {/* stamp_size_vertical */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.stamp_size_vertical ? 'visible' : ''}`}>Stamp Size Vertical</div>
+                        {validationErrors.stamp_size_vertical && (
+                            <div className="validation-error">{validationErrors.stamp_size_vertical}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Stamp Size Vertical"
@@ -600,16 +882,20 @@ const SideBar: React.FC = () => {
                     {/* hue */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.hue ? 'visible' : ''}`}>Hue</div>
+                        {validationErrors.hue && (
+                            <div className="validation-error">{validationErrors.hue}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Hue (0-360)"
                             value={searchParams.hue || ''}
                             onChange={(e) => handleChange('hue', e.target.value)}
+                            className={validationErrors.hue ? 'input-error' : ''}
                             autoComplete="new-password"
                             autoCorrect="off"
                             spellCheck="false"
                             onKeyDown={(e) => {
-                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', '-'].includes(e.key)) {
                                     e.preventDefault();
                                 }
                             }}
@@ -618,6 +904,9 @@ const SideBar: React.FC = () => {
                     {/* saturation */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.saturation ? 'visible' : ''}`}>Saturation</div>
+                        {validationErrors.saturation && (
+                            <div className="validation-error">{validationErrors.saturation}</div>
+                        )}
                         <input
                             type="number"
                             placeholder="Saturation (0-100)"
@@ -627,7 +916,7 @@ const SideBar: React.FC = () => {
                             autoCorrect="off"
                             spellCheck="false"
                             onKeyDown={(e) => {
-                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)) {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', '-'].includes(e.key)) {
                                     e.preventDefault();
                                 }
                             }}
@@ -636,11 +925,36 @@ const SideBar: React.FC = () => {
                     {/* tolerance */}
                     <div className="single-input">
                         <div className={`single-input-title ${searchParams.tolerance ? 'visible' : ''}`}>Tolerance</div>
+                        {validationErrors.tolerance && (
+                            <div className="validation-error">{validationErrors.tolerance}</div>
+                        )}
                         <input
                             type="number"
-                            placeholder="Tolerance (0-100)"
+                            placeholder="Tolerance (5-30)"
                             value={searchParams.tolerance || ''}
                             onChange={(e) => handleChange('tolerance', e.target.value)}
+                            autoComplete="new-password"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            onKeyDown={(e) => {
+                                if (!/\d/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', '-'].includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* max results */}
+                    <div className="single-input">
+                        <div className={`single-input-title ${searchParams.max_results ? 'visible' : ''}`}>Max Results</div>
+                        {validationErrors.max_results && (
+                            <div className="validation-error">{validationErrors.max_results}</div>
+                        )}
+                        <input
+                            type="number"
+                            placeholder="Max Results"
+                            value={searchParams.max_results || ''}
+                            onChange={(e) => handleChange('max_results', e.target.value)}
                             autoComplete="new-password"
                             autoCorrect="off"
                             spellCheck="false"
