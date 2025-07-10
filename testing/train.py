@@ -33,17 +33,27 @@ class TripletStampDataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         anchor_img, anchor_label = self.base_dataset[index]
 
-        # Sample positive
-        positive_index = random.choice(self.label_to_indices[anchor_label])
-        while positive_index == index:
-            positive_index = random.choice(self.label_to_indices[anchor_label])
+        # Sample positive - for single image per class, we can use the same index
+        # since augmentation will create different versions
+        positive_candidates = [
+            idx for idx in self.label_to_indices[anchor_label] if idx != index]
+        if not positive_candidates:
+            # If only one image per class, use the same index (augmentation will make it different)
+            positive_index = index
+        else:
+            positive_index = random.choice(positive_candidates)
         positive_img, _ = self.base_dataset[positive_index]
 
         # Sample negative
-        negative_label = random.choice(list(self.label_to_indices.keys()))
-        while negative_label == anchor_label:
-            negative_label = random.choice(list(self.label_to_indices.keys()))
-        negative_index = random.choice(self.label_to_indices[negative_label])
+        negative_labels = [
+            label for label in self.label_to_indices.keys() if label != anchor_label]
+        if not negative_labels:
+            # Fallback if only one class exists (shouldn't happen in practice)
+            raise ValueError("Cannot create triplets with only one class")
+        else:
+            negative_label = random.choice(negative_labels)
+            negative_index = random.choice(
+                self.label_to_indices[negative_label])
         negative_img, _ = self.base_dataset[negative_index]
 
         return anchor_img, positive_img, negative_img
@@ -63,48 +73,19 @@ def train(model, train_loader, criterion, optimizer, device, epochs=10):
         pbar = tqdm(train_loader, desc=f"Epoch {epoch + 1}/{epochs}")
 
         for anchor, positive, negative in pbar:
-
-            print("Processing batch...")
-
             anchor = anchor.to(device)
-
-            print(f"Anchor shape: {anchor.shape}")
-
             positive = positive.to(device)
-
-            print(f"Positive shape: {positive.shape}")
-
             negative = negative.to(device)
-
-            print(f"Negative shape: {negative.shape}")
 
             optimizer.zero_grad()
 
-            print("Forward pass...")
-
             anchor_out = model(anchor)
-
-            print(f"Anchor output shape: {anchor_out.shape}")
-
             positive_out = model(positive)
-
-            print(f"Positive output shape: {positive_out.shape}")
-
             negative_out = model(negative)
 
-            print(f"Negative output shape: {negative_out.shape}")
-
             loss = criterion(anchor_out, positive_out, negative_out)
-
-            print(f"Loss: {loss.item()}")
-
             loss.backward()
-
-            print("Backward pass...")
-
             optimizer.step()
-
-            print("Optimizer step...")
 
             running_loss += loss.item()
             pbar.set_postfix(loss=running_loss / (pbar.n + 1))
@@ -119,9 +100,9 @@ def train(model, train_loader, criterion, optimizer, device, epochs=10):
 
 if __name__ == "__main__":
     image_root = "./images/original"
-    batch_size = 8  # 32
+    batch_size = 8  # 32 -> 8 faster?
     embedding_dim = 128
-    epochs = 20
+    epochs = 10  # 20
     lr = 1e-4
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -132,14 +113,36 @@ if __name__ == "__main__":
         image_root=image_root,
         transform=get_stamp_augmentations()
     )
+
+    print(f"✅ Found {len(base_dataset)} images")
+
     triplet_dataset = TripletStampDataset(base_dataset)
+
+    # Check dataset integrity
+    print(
+        f"✅ Number of unique labels: {len(triplet_dataset.label_to_indices)}")
+    print(
+        f"✅ Images per label: {len(base_dataset) // len(triplet_dataset.label_to_indices)}")
+
     train_loader = DataLoader(
-        triplet_dataset, batch_size=batch_size, shuffle=True, num_workers=4, drop_last=True)
+        triplet_dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True)
 
     # Model, loss, optimizer
     model = StampEncoder(output_dim=embedding_dim).to(device)
     criterion = nn.TripletMarginLoss(margin=1.0, p=2)
     optimizer = optim.Adam(model.parameters(), lr=lr)
+
+    # Test a single batch to debug tensor types
+    print("🔍 Testing data loading...")
+    test_batch = next(iter(train_loader))
+    anchor_test, positive_test, negative_test = test_batch
+    print(f"   Anchor shape: {anchor_test.shape}, dtype: {anchor_test.dtype}")
+    print(
+        f"   Positive shape: {positive_test.shape}, dtype: {positive_test.dtype}")
+    print(
+        f"   Negative shape: {negative_test.shape}, dtype: {negative_test.dtype}")
+    print(
+        f"   Anchor range: [{anchor_test.min():.3f}, {anchor_test.max():.3f}]")
 
     # Train
     train(model, train_loader, criterion, optimizer, device, epochs=epochs)
