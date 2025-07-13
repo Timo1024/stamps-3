@@ -1,3 +1,7 @@
+images/
+
+*.pth
+
 # Node.js / React
 node_modules/
 dist/
