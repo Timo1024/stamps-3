@@ -1,0 +1,848 @@
+{
+  "samples": [
+    {
+      "image_path": "images\\original\\Aaland\\2000\\18080\\FH-i.jpg",
+      "country": "Aaland",
+      "year": "2000",
+      "set_id": "18080",
+      "country_idx": 0,
+      "unique_id": "Aaland_2000_18080_FH-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265737\\ABF-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265737",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265737_ABF-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1999\\265157\\JV-i.jpg",
+      "country": "Abkhazia",
+      "year": "1999",
+      "set_id": "265157",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1999_265157_JV-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265738\\ABL-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265738",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265738_ABL-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1970\\17563\\AA2-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1970",
+      "set_id": "17563",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1970_17563_AA2-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2007\\265572\\XT-i.jpg",
+      "country": "Abkhazia",
+      "year": "2007",
+      "set_id": "265572",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2007_265572_XT-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2012\\205650\\MX-i.jpg",
+      "country": "Aaland",
+      "year": "2012",
+      "set_id": "205650",
+      "country_idx": 0,
+      "unique_id": "Aaland_2012_205650_MX-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1999\\265160\\KF-i.jpg",
+      "country": "Abkhazia",
+      "year": "1999",
+      "set_id": "265160",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1999_265160_KF-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1996\\9078\\DB-i.jpg",
+      "country": "Aaland",
+      "year": "1996",
+      "set_id": "9078",
+      "country_idx": 0,
+      "unique_id": "Aaland_1996_9078_DB-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1988\\9036\\X-i.jpg",
+      "country": "Aaland",
+      "year": "1988",
+      "set_id": "9036",
+      "country_idx": 0,
+      "unique_id": "Aaland_1988_9036_X-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1999\\265163\\KL-i.jpg",
+      "country": "Abkhazia",
+      "year": "1999",
+      "set_id": "265163",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1999_265163_KL-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2001\\265459\\PI-i.jpg",
+      "country": "Abkhazia",
+      "year": "2001",
+      "set_id": "265459",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2001_265459_PI-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2010\\119866\\LN-i.jpg",
+      "country": "Aaland",
+      "year": "2010",
+      "set_id": "119866",
+      "country_idx": 0,
+      "unique_id": "Aaland_2010_119866_LN-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2009\\265757\\ABX-i.jpg",
+      "country": "Abkhazia",
+      "year": "2009",
+      "set_id": "265757",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2009_265757_ABX-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2015\\224865\\OM-i.jpg",
+      "country": "Aaland",
+      "year": "2015",
+      "set_id": "224865",
+      "country_idx": 0,
+      "unique_id": "Aaland_2015_224865_OM-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2005\\265510\\VL-i.jpg",
+      "country": "Abkhazia",
+      "year": "2005",
+      "set_id": "265510",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2005_265510_VL-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1997\\264972\\DK-i.jpg",
+      "country": "Abkhazia",
+      "year": "1997",
+      "set_id": "264972",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1997_264972_DK-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1994\\8980\\BZ-i.jpg",
+      "country": "Aaland",
+      "year": "1994",
+      "set_id": "8980",
+      "country_idx": 0,
+      "unique_id": "Aaland_1994_8980_BZ-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2006\\265552\\WN-i.jpg",
+      "country": "Abkhazia",
+      "year": "2006",
+      "set_id": "265552",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2006_265552_WN-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2024\\283364\\US-i.jpg",
+      "country": "Aaland",
+      "year": "2024",
+      "set_id": "283364",
+      "country_idx": 0,
+      "unique_id": "Aaland_2024_283364_US-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2022\\274419\\TI-i.jpg",
+      "country": "Aaland",
+      "year": "2022",
+      "set_id": "274419",
+      "country_idx": 0,
+      "unique_id": "Aaland_2022_274419_TI-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1995\\264920\\BH-i.jpg",
+      "country": "Abkhazia",
+      "year": "1995",
+      "set_id": "264920",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1995_264920_BH-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2004\\265500\\UB-i.jpg",
+      "country": "Abkhazia",
+      "year": "2004",
+      "set_id": "265500",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2004_265500_UB-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2004\\265501\\UO-i.jpg",
+      "country": "Abkhazia",
+      "year": "2004",
+      "set_id": "265501",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2004_265501_UO-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1999\\265158\\JZ-i.jpg",
+      "country": "Abkhazia",
+      "year": "1999",
+      "set_id": "265158",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1999_265158_JZ-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265739\\ABQ-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265739",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265739_ABQ-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265736\\AAT-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265736",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265736_AAT-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2000\\265281\\MC-i.jpg",
+      "country": "Abkhazia",
+      "year": "2000",
+      "set_id": "265281",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2000_265281_MC-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1998\\265045\\GE-i.jpg",
+      "country": "Abkhazia",
+      "year": "1998",
+      "set_id": "265045",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1998_265045_GE-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2009\\26849\\KL-i.jpg",
+      "country": "Aaland",
+      "year": "2009",
+      "set_id": "26849",
+      "country_idx": 0,
+      "unique_id": "Aaland_2009_26849_KL-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1972\\110680\\AT10-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1972",
+      "set_id": "110680",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1972_110680_AT10-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2000\\265398\\NC-i.jpg",
+      "country": "Abkhazia",
+      "year": "2000",
+      "set_id": "265398",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2000_265398_NC-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2006\\265566\\XL1-i.jpg",
+      "country": "Abkhazia",
+      "year": "2006",
+      "set_id": "265566",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2006_265566_XL1-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2004\\22224\\HT-i.jpg",
+      "country": "Aaland",
+      "year": "2004",
+      "set_id": "22224",
+      "country_idx": 0,
+      "unique_id": "Aaland_2004_22224_HT-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265738\\ABJ-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265738",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265738_ABJ-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2002\\265470\\QG-i.jpg",
+      "country": "Abkhazia",
+      "year": "2002",
+      "set_id": "265470",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2002_265470_QG-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2005\\22234\\IM-i.jpg",
+      "country": "Aaland",
+      "year": "2005",
+      "set_id": "22234",
+      "country_idx": 0,
+      "unique_id": "Aaland_2005_22234_IM-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2006\\265554\\WP-i.jpg",
+      "country": "Abkhazia",
+      "year": "2006",
+      "set_id": "265554",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2006_265554_WP-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2009\\265758\\ACL-i.jpg",
+      "country": "Abkhazia",
+      "year": "2009",
+      "set_id": "265758",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2009_265758_ACL-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2014\\216896\\NT-i.jpg",
+      "country": "Aaland",
+      "year": "2014",
+      "set_id": "216896",
+      "country_idx": 0,
+      "unique_id": "Aaland_2014_216896_NT-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1994\\8980\\CB-i.jpg",
+      "country": "Aaland",
+      "year": "1994",
+      "set_id": "8980",
+      "country_idx": 0,
+      "unique_id": "Aaland_1994_8980_CB-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2007\\265583\\YN-i.jpg",
+      "country": "Abkhazia",
+      "year": "2007",
+      "set_id": "265583",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2007_265583_YN-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2003\\265483\\SB-i.jpg",
+      "country": "Abkhazia",
+      "year": "2003",
+      "set_id": "265483",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2003_265483_SB-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2006\\265551\\WK-i.jpg",
+      "country": "Abkhazia",
+      "year": "2006",
+      "set_id": "265551",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2006_265551_WK-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1990\\8961\\AL-i.jpg",
+      "country": "Aaland",
+      "year": "1990",
+      "set_id": "8961",
+      "country_idx": 0,
+      "unique_id": "Aaland_1990_8961_AL-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1998\\265064\\HD-i.jpg",
+      "country": "Abkhazia",
+      "year": "1998",
+      "set_id": "265064",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1998_265064_HD-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1995\\264928\\BV-i.jpg",
+      "country": "Abkhazia",
+      "year": "1995",
+      "set_id": "264928",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1995_264928_BV-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1992\\8970\\BD-i.jpg",
+      "country": "Aaland",
+      "year": "1992",
+      "set_id": "8970",
+      "country_idx": 0,
+      "unique_id": "Aaland_1992_8970_BD-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1972\\110680\\AT8-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1972",
+      "set_id": "110680",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1972_110680_AT8-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2003\\265490\\TI-i.jpg",
+      "country": "Abkhazia",
+      "year": "2003",
+      "set_id": "265490",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2003_265490_TI-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2021\\266841\\AR-i.jpg",
+      "country": "Aaland",
+      "year": "2021",
+      "set_id": "266841",
+      "country_idx": 0,
+      "unique_id": "Aaland_2021_266841_AR-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2000\\18080\\FG-i.jpg",
+      "country": "Aaland",
+      "year": "2000",
+      "set_id": "18080",
+      "country_idx": 0,
+      "unique_id": "Aaland_2000_18080_FG-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2012\\195982\\MN-i.jpg",
+      "country": "Aaland",
+      "year": "2012",
+      "set_id": "195982",
+      "country_idx": 0,
+      "unique_id": "Aaland_2012_195982_MN-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2009\\265759\\ACN-i.jpg",
+      "country": "Abkhazia",
+      "year": "2009",
+      "set_id": "265759",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2009_265759_ACN-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1996\\264937\\CG-i.jpg",
+      "country": "Abkhazia",
+      "year": "1996",
+      "set_id": "264937",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1996_264937_CG-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2001\\265458\\OU-i.jpg",
+      "country": "Abkhazia",
+      "year": "2001",
+      "set_id": "265458",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2001_265458_OU-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1995\\264923\\BL-i.jpg",
+      "country": "Abkhazia",
+      "year": "1995",
+      "set_id": "264923",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1995_264923_BL-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2010\\265825\\AEK-i.jpg",
+      "country": "Abkhazia",
+      "year": "2010",
+      "set_id": "265825",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2010_265825_AEK-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2021\\267952\\SM-i.jpg",
+      "country": "Aaland",
+      "year": "2021",
+      "set_id": "267952",
+      "country_idx": 0,
+      "unique_id": "Aaland_2021_267952_SM-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2009\\265813\\ADF-i.jpg",
+      "country": "Abkhazia",
+      "year": "2009",
+      "set_id": "265813",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2009_265813_ADF-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1994\\8979\\BW-i.jpg",
+      "country": "Aaland",
+      "year": "1994",
+      "set_id": "8979",
+      "country_idx": 0,
+      "unique_id": "Aaland_1994_8979_BW-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2007\\265575\\XU-i.jpg",
+      "country": "Abkhazia",
+      "year": "2007",
+      "set_id": "265575",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2007_265575_XU-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2002\\22210\\GX-i.jpg",
+      "country": "Aaland",
+      "year": "2002",
+      "set_id": "22210",
+      "country_idx": 0,
+      "unique_id": "Aaland_2002_22210_GX-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265590\\ZK1-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265590",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265590_ZK1-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1967\\17546\\K3-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1967",
+      "set_id": "17546",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1967_17546_K3-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1968\\17553\\R1-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1968",
+      "set_id": "17553",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1968_17553_R1-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1987\\9030\\O-i.jpg",
+      "country": "Aaland",
+      "year": "1987",
+      "set_id": "9030",
+      "country_idx": 0,
+      "unique_id": "Aaland_1987_9030_O-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2005\\265513\\VP-i.jpg",
+      "country": "Abkhazia",
+      "year": "2005",
+      "set_id": "265513",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2005_265513_VP-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1995\\9075\\CV-i.jpg",
+      "country": "Aaland",
+      "year": "1995",
+      "set_id": "9075",
+      "country_idx": 0,
+      "unique_id": "Aaland_1995_9075_CV-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2000\\265277\\LX-i.jpg",
+      "country": "Abkhazia",
+      "year": "2000",
+      "set_id": "265277",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2000_265277_LX-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1997\\9003\\DV-i.jpg",
+      "country": "Aaland",
+      "year": "1997",
+      "set_id": "9003",
+      "country_idx": 0,
+      "unique_id": "Aaland_1997_9003_DV-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1994\\264908\\V-i.jpg",
+      "country": "Abkhazia",
+      "year": "1994",
+      "set_id": "264908",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1994_264908_V-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2000\\265402\\NI-i.jpg",
+      "country": "Abkhazia",
+      "year": "2000",
+      "set_id": "265402",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2000_265402_NI-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2001\\18114\\FV-i.jpg",
+      "country": "Aaland",
+      "year": "2001",
+      "set_id": "18114",
+      "country_idx": 0,
+      "unique_id": "Aaland_2001_18114_FV-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2005\\265505\\VC-i.jpg",
+      "country": "Abkhazia",
+      "year": "2005",
+      "set_id": "265505",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2005_265505_VC-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1996\\9079\\DD-i.jpg",
+      "country": "Aaland",
+      "year": "1996",
+      "set_id": "9079",
+      "country_idx": 0,
+      "unique_id": "Aaland_1996_9079_DD-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2004\\22227\\HW-i.jpg",
+      "country": "Aaland",
+      "year": "2004",
+      "set_id": "22227",
+      "country_idx": 0,
+      "unique_id": "Aaland_2004_22227_HW-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1998\\265044\\GD-i.jpg",
+      "country": "Abkhazia",
+      "year": "1998",
+      "set_id": "265044",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1998_265044_GD-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2003\\265495\\TO-i.jpg",
+      "country": "Abkhazia",
+      "year": "2003",
+      "set_id": "265495",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2003_265495_TO-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1999\\265166\\LD-i.jpg",
+      "country": "Abkhazia",
+      "year": "1999",
+      "set_id": "265166",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1999_265166_LD-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1997\\9084\\DM-i.jpg",
+      "country": "Aaland",
+      "year": "1997",
+      "set_id": "9084",
+      "country_idx": 0,
+      "unique_id": "Aaland_1997_9084_DM-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2008\\265594\\ZO-i.jpg",
+      "country": "Abkhazia",
+      "year": "2008",
+      "set_id": "265594",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2008_265594_ZO-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1999\\9027\\FB-i.jpg",
+      "country": "Aaland",
+      "year": "1999",
+      "set_id": "9027",
+      "country_idx": 0,
+      "unique_id": "Aaland_1999_9027_FB-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2024\\281687\\UQ-i.jpg",
+      "country": "Aaland",
+      "year": "2024",
+      "set_id": "281687",
+      "country_idx": 0,
+      "unique_id": "Aaland_2024_281687_UQ-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2011\\163657\\MD-i.jpg",
+      "country": "Aaland",
+      "year": "2011",
+      "set_id": "163657",
+      "country_idx": 0,
+      "unique_id": "Aaland_2011_163657_MD-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2023\\279109\\UI-i.jpg",
+      "country": "Aaland",
+      "year": "2023",
+      "set_id": "279109",
+      "country_idx": 0,
+      "unique_id": "Aaland_2023_279109_UI-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1966\\17540\\I2-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1966",
+      "set_id": "17540",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1966_17540_I2-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2003\\22219\\HN-i.jpg",
+      "country": "Aaland",
+      "year": "2003",
+      "set_id": "22219",
+      "country_idx": 0,
+      "unique_id": "Aaland_2003_22219_HN-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2007\\265577\\YA-i.jpg",
+      "country": "Abkhazia",
+      "year": "2007",
+      "set_id": "265577",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2007_265577_YA-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2014\\221038\\OF-i.jpg",
+      "country": "Aaland",
+      "year": "2014",
+      "set_id": "221038",
+      "country_idx": 0,
+      "unique_id": "Aaland_2014_221038_OF-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1992\\8969\\BA-i.jpg",
+      "country": "Aaland",
+      "year": "1992",
+      "set_id": "8969",
+      "country_idx": 0,
+      "unique_id": "Aaland_1992_8969_BA-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2021\\270331\\SU-i.jpg",
+      "country": "Aaland",
+      "year": "2021",
+      "set_id": "270331",
+      "country_idx": 0,
+      "unique_id": "Aaland_2021_270331_SU-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2001\\265407\\OG-i.jpg",
+      "country": "Abkhazia",
+      "year": "2001",
+      "set_id": "265407",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2001_265407_OG-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1997\\264978\\DX-i.jpg",
+      "country": "Abkhazia",
+      "year": "1997",
+      "set_id": "264978",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1997_264978_DX-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2016\\228018\\PG-i.jpg",
+      "country": "Aaland",
+      "year": "2016",
+      "set_id": "228018",
+      "country_idx": 0,
+      "unique_id": "Aaland_2016_228018_PG-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\2000\\265403\\NO-i.jpg",
+      "country": "Abkhazia",
+      "year": "2000",
+      "set_id": "265403",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_2000_265403_NO-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\2017\\245469\\QA-i.jpg",
+      "country": "Aaland",
+      "year": "2017",
+      "set_id": "245469",
+      "country_idx": 0,
+      "unique_id": "Aaland_2017_245469_QA-i"
+    },
+    {
+      "image_path": "images\\original\\Abkhazia\\1998\\265056\\GN1-i.jpg",
+      "country": "Abkhazia",
+      "year": "1998",
+      "set_id": "265056",
+      "country_idx": 3,
+      "unique_id": "Abkhazia_1998_265056_GN1-i"
+    },
+    {
+      "image_path": "images\\original\\Abu Dhabi\\1970\\17563\\AB3-i.jpg",
+      "country": "Abu Dhabi",
+      "year": "1970",
+      "set_id": "17563",
+      "country_idx": 4,
+      "unique_id": "Abu Dhabi_1970_17563_AB3-i"
+    },
+    {
+      "image_path": "images\\original\\Aaland\\1994\\8981\\CD-i.jpg",
+      "country": "Aaland",
+      "year": "1994",
+      "set_id": "8981",
+      "country_idx": 0,
+      "unique_id": "Aaland_1994_8981_CD-i"
+    }
+  ],
+  "total_count": 100,
+  "countries": [
+    "Aaland",
+    "Abu Dhabi",
+    "Abkhazia"
+  ],
+  "years": [
+    "2021",
+    "1997",
+    "2008",
+    "1992",
+    "2004",
+    "2023",
+    "2003",
+    "1988",
+    "2017",
+    "1994",
+    "2022",
+    "1966",
+    "2016",
+    "2001",
+    "2011",
+    "1972",
+    "1968",
+    "2012",
+    "2006",
+    "2014",
+    "1967",
+    "1995",
+    "1970",
+    "1996",
+    "2009",
+    "2002",
+    "2015",
+    "1998",
+    "2007",
+    "2010",
+    "2005",
+    "1990",
+    "2000",
+    "1987",
+    "1999",
+    "2024"
+  ]
+}
